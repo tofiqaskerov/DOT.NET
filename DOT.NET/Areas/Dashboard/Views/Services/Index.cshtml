@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Services>
+<style>
+    a {
+        margin-bottom: 10px;
+    }
+
+    td {
+        transition: .3s ease;
+    }
+
+    td:hover {
+        color: red;
+    }
+    .icon{
+        color:#FFAA17;
+    }
+</style>
+
+
+@if (ViewBag.ServicesLimit <= 3)
+{
+    <div class="container">
+        <a class="btn btn-success mt-5 mb-4 " style=" width: 10%;" href="/dashboard/services/create">Create</a>
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="content">
+        <div class="container">
+            <div class="table-responsive">
+
+                <table class="table table-striped custom-table">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Id</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var service in Model)
+                        {
+                            <tr scope="row" class="font-weight-bold">
+                                <td>
+                                    @service.Id
+                                </td>
+                                <td>@service.Category.Name</td>
+                                <td>
+                                    @service.Description
+                                </td>
+                                <td><i class="fa-solid icon fa-3x @service.Icon"></i></td>
+                                <td>
+                                    <a style="color:#fff;" class="btn btn-warning" href="/dashboard/services/edit/@service.Id">Edit</a>
+                                    <a services-value="@service.Id" style="color:#fff;" class=" btnSave btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="alert text-center alert-info">Bazada melumat yoxdur</div>
+    </div>
+}
+
+
+@section Scripts {
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(".btnSave").click(function(e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let servicesId = e.currentTarget.attributes[0].value
+                $.ajax({
+                    method: "POST",
+                    url: "services/delete/",
+                    data: {
+                        id: servicesId
+                    }
+                })
+                Swal.fire({
+                    title: 'Deleted',
+                    text: "service is delete!",
+                    icon: 'success',
+
+                }).then((result) => {
+                    window.location = "services"
+                })
+
+            }
+        })
+    })
+</script>
+}
+
+
+

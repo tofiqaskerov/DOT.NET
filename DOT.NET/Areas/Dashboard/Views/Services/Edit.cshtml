@@ -1,0 +1,106 @@
+﻿@model Services
+
+<style>
+    #icons {
+        color: #000;
+    }
+
+    .myIcon {
+        font-size: 40px;
+        margin-right: 40px;
+        margin-top: 10px;
+    }
+
+    .myIcon {
+        font-size: 40px;
+        margin-right: 40px;
+        margin-top: 10px;
+    }
+
+    .bg-color {
+        color: #FFAA17;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit" method="post" class="mt-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    @{
+                        var catName = Model.Category.Name;
+
+                        <select class="form-control" name="CategoryId">
+
+                            @foreach (var category in ViewData["category"] as List<Category>)
+                            {
+                                if (catName == category.Name)
+                                {
+                                    <option value="@Model.CategoryId" selected>@category.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@Model.CategoryId">@category.Name</option>
+                                }
+                            }
+                            
+                        </select>
+                    }
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Description</label>
+                    <input asp-for="Description" class="form-control" name="Description" value="@Model.Description" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Icon" class="form-control" type="hidden" name="Icon" id="IcoInput" value="@Model.Icon" />
+                    <div id="icons" class="mt-4">
+                        <i iconName=" fa-layer-group" class="myIcon @( Model.Icon == "fa-layer-group" ? "bg-color" : "") fa-solid fa-layer-group"></i>
+                        <i iconName=" fa-terminal" class="myIcon @( Model.Icon == "fa-terminal" ? "bg-color" : "") fa-solid fa-terminal"></i>
+                        <i iconName=" fa-laptop" class="myIcon @( Model.Icon == "fa-laptop" ? "bg-color" : "") fa-solid fa-laptop"></i>
+                        <i iconName=" fa-camera" class="myIcon @( Model.Icon == "fa-camera" ? "bg-color" : "") fa-solid fa-camera"></i>
+                        <i iconName=" fa-pen-to-square" class="myIcon @( Model.Icon == "fa-pen-to-square" ? "bg-color" : "") fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <span asp-validation-for="Icon" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a class="btn btn-success" href="/dashboard/services">Return Index</a>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+<script>
+    var icons = document.getElementById("icons")
+     var myIcon = document.querySelectorAll(".myIcon")
+     for(let i=0; i<myIcon.length; i++){
+          myIcon[i].onclick = (e)=>{
+                for(let j =0; j<myIcon.length; j++ ){
+                    myIcon[j].style.color = '#000'
+                }
+                myIcon[i].style.color = '#FFAA17';
+
+          }
+     }
+
+     let myInput = document.getElementById("IcoInput")
+     $(document).on('click', '.myIcon', function (e) {
+         myInput.value = e.currentTarget.attributes.iconName.value
+
+         //this.style.color = "red"
+         //e.style.color = "red"
+         console.log(e.target)
+     });
+</script>
