@@ -1,0 +1,36 @@
+﻿@model Location
+<style>
+    a {
+        
+        margin-top:20px;
+    }
+</style>
+
+
+@if (Model == null)
+{
+    <div class="container">
+        <a class="btn btn-success mt-5 mb-4 " style=" width: 10%;" href="/dashboard/location/create">Create</a>
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="content">
+        <iframe src="@Model.LocationLink" height="450" style="border:0; width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a style="color:#fff;" class="btn btn-warning" href="/dashboard/location/edit/@Model.Id">Edit</a>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="alert text-center alert-info">Bazada melumat yoxdur</div>
+    </div>
+}
+
+
+
+
+
+
+

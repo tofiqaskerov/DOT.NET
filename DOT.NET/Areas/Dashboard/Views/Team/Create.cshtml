@@ -1,0 +1,40 @@
+﻿
+<style>
+    input {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="card shadow my-5">
+    <div class="card-body">
+        <form class="form-group" id="contactForm" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-12 my-2">
+                    <input class="form-control" placeholder="Name" type="text" name="Name" />
+                </div>
+                <div class="col-lg-12 my-2">
+                    <select class="form-control" name="RolesId">
+                        @foreach (var role in ViewData["Role"] as List<Roles>)
+                        {
+                            <option value="@role.Id">@role.RoleName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-lg-12 my-2">
+                    <span>PhotoUrl</span>
+                    <input class="form-control" accept=".jpg, .png" type="file" name="NewPhoto" />
+                </div>
+                <div class="input-group my-2">
+                    <h6 style="color:red; font-weight:600;">@ViewBag.PhotoError</h6>
+                </div>
+
+            </div>
+            <input id="submitButton" type="submit" value="Create" class="btn btn-outline-success mt4" />
+            <div @*class="mt-5"*@>
+                <a class="btn btn-success" href="/dashboard/team">Return Index</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

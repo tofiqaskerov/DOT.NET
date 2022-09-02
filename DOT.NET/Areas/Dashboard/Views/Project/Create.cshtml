@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Category>
 <style>
     input {
         margin-bottom: 10px;
@@ -11,15 +11,15 @@
             <div class="row">
                 <div class="col-lg-12 my-2">
                     <select class="form-control" name="CategoryId">
-                        @foreach (var category in ViewBag.Category)
+                        @foreach (var category in Model)
                         {
-                            <option value="@category.Id">@category.Name</option>
+                            <option value="@category.Id" selected>@category.Name</option>
                         }
                     </select>
                 </div>
                 <div class="col-lg-12 my-2">
                     <span>PhotoUrl</span>
-                    <input class="form-control" type="file" name="NewPhoto" />
+                    <input class="form-control" accept = ".jpg, .png" type="file" name="NewPhoto" />
                 </div>
                 <div class="input-group my-2">
                     <h6 style="color:red; font-weight:600;">@ViewBag.PhotoError</h6>

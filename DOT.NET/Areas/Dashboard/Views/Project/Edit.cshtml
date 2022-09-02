@@ -1,0 +1,55 @@
+﻿@model Projects
+<form enctype="multipart/form-data" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="mb-2 my-2">
+                <label class="font-weight-bold">Category</label>
+            </div>
+            <div class="input-group my-2">
+                    @{
+                        var catName = Model.Category.Name;
+
+                        <select class="form-control" name="CategoryId">
+
+                            @foreach (var category in ViewData["Category"] as List<Category>)
+                            {
+                                if (catName == category.Name)
+                                {
+                                    <option value="@category.Id" selected>@category.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            }
+                            
+                        </select>
+                    }
+            </div>
+            <div class="my-2">
+                <label class="font-weight-bold">Photo</label>
+            </div>
+            <div class="input-group my-2">
+                <input name="NewPhoto" accept=".jpg, .png" class="form-control" type="file" placeholder="PhotoURL" />
+                <br />
+                <input type="hidden" name="oldPhoto" value="@Model.PhotoURL" />
+            </div>
+           
+        </div>
+        <div class="input-group my-2">
+            <div class="card">
+                <div class="card-body">
+                    <br />
+                    <img height="200" src="~/@Model.PhotoURL" />
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary my-2" value="Save" />
+        <div @*class="mt-5"*@>
+            <a class="btn btn-success" href="/dashboard/project">Return Index</a>
+        </div>
+    </div>
+</form>
+
+
+

@@ -14,12 +14,12 @@ namespace Core.DataAccess.EntityFramework
         where TContext : DbContext, new()
 
     {
-        public void Add(TEntity entity)
+        public async void Add(TEntity entity)
         {
             using TContext context = new();
             var addEntity = context.Entry(entity);
             addEntity.State = EntityState.Added;
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public void Delete(TEntity entity)

@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Packet>
+<style>
+    a {
+        margin-bottom: 10px;
+    }
+
+    td {
+        transition: .3s ease;
+    }
+
+        td:hover {
+            color: red;
+        }
+
+    .icon {
+        color: #FFAA17;
+    }
+</style>
+
+
+
+
+<div class="container">
+    @if (ViewBag.PacketLimit <= 3)
+    {
+        <a class="btn btn-success mt-2 mb-3 " style=" width: 10%;" href="/dashboard/packet/create">Create Packet</a>
+    }
+    <a class="btn btn-success mt-2 mb-3 ml-5" style=" width: 15%;" href="/dashboard/packetcategory/">Packet Category</a>
+</div>
+
+
+
+@if (Model != null)
+{
+    <div class="content">
+        <div class="container">
+            <div class="table-responsive">
+
+                <table class="table table-striped custom-table">
+                    <thead>
+                        <tr>    
+
+                            <th scope="col">Id</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Language</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Action</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var packet in Model)
+                        {
+                            <tr scope="row" class="font-weight-bold">
+                                <td>@packet.Id</td>
+                                <td>@packet.PacketCategory.Name</td>
+                                <td>@packet.Language</td>
+                                <td>@packet.Description</td>
+                                <td>@packet.Description_1</td>
+                                <td>@packet.Description_2</td>
+                                <td>@packet.Price $</td>
+                                <td>
+                                    <a style="color:#fff;" class="btn btn-warning" href="/dashboard/packet/edit/@packet.Id">Edit</a>
+                                    <a packet-value="@packet.Id" style="color:#fff;" class=" btnSave btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="alert text-center alert-info">Bazada melumat yoxdur</div>
+    </div>
+}
+
+
+@section Scripts {
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(".btnSave").click(function(e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let packetId = e.currentTarget.attributes[0].value
+                $.ajax({
+                    method: "POST",
+                    url: "packet/delete/",
+                    data: {
+                        id: packetId
+                    }
+                })
+                Swal.fire({
+                    title: 'Deleted',
+                    text: "packet is delete!",
+                    icon: 'success',
+
+                }).then((result) => {
+                    window.location = "packet"
+                })
+
+            }
+        })
+    })
+</script>
+}
+
+
+

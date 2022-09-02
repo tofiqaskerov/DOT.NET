@@ -18,9 +18,34 @@ namespace Business.Concrete
             _projectDal = projectDal;
         }
 
+        public void Add(Projects project)
+        {
+            _projectDal.Add(project);
+        }
+
+        public void Remove(Projects project)
+        {
+            _projectDal.Delete(project);    
+        }
+
+        public Projects Get(int id)
+        {
+            return _projectDal.Get(x => x.Id == id);
+        }
+
         public List<Projects> GetAllProjects()
         {
             return _projectDal.GetAllProjects();
+        }
+
+        public Projects GetProjectsByCategory(int id)
+        {
+            return _projectDal.GetProjectsByCategory(id);
+        }
+
+        public void Update(Projects project)
+        {
+            _projectDal.Update(project);
         }
     }
 }

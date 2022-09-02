@@ -1,0 +1,67 @@
+﻿@model Packet
+<style>
+    input {
+        margin-bottom: 10px;
+    }
+
+    #icons {
+        color: #000;
+    }
+
+    .myIcon {
+        font-size: 40px;
+        margin-right: 40px;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="card shadow my-5">
+    <div class="card-body">
+        <form class="form-group" id="contactForm" method="post">
+            <div class="row">
+                <div class="col-lg-12 my-2">
+                    <select class="form-control" name="PacketCategoryId">
+                        @{
+                            var categoryName = @Model.PacketCategory.Name;
+                            foreach (var packetCategory in ViewBag.PacketCategory)
+                            {
+                                if(categoryName == packetCategory.Name)
+                                {
+                                    <option value="@packetCategory.Id" selected >@packetCategory.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@packetCategory.Id" >@packetCategory.Name</option>  
+                                }
+
+                            }
+                        }
+
+                    </select>
+                </div>
+                <div class="col-lg-12 my-2">
+                    <input class="form-control" placeholder="Language" type="text" value="@Model.Language" name="Language" />
+                </div>
+                <div class="col-lg-12  my-2">
+                    <input name="Description" value="@Model.Description" class="form-control" type="text" placeholder="Description-1" />
+                </div>
+                <div class="col-lg-12 my-2">
+                    <input name="Description_1" value="@Model.Description_1" class="form-control" type="text" placeholder="Description-2" />
+                </div>
+                <div class="col-lg-12  my-2">
+                    <input name="Description_2" value="@Model.Description_2" class="form-control" type="text" placeholder="Description-3" />
+                </div>
+                <div class="col-lg-12  my-2">
+                    <input name="Price" value="@Model.Price" class="form-control" type="number" min="0" max="1000" oninput="this.value ==!!this.value && Math.abs(this.value) >=0 ? Math.abs(this.value) : null" placeholder="Price" />
+                </div>
+
+            </div>
+            <input id="submitButton" type="submit" value="Create" class="btn btn-outline-success mt4" />
+        </form>
+    </div>
+</div>
+
+
+
+
+

@@ -1,13 +1,14 @@
 ﻿@model HomeVM
 
 <style>
-    .hover-span{
-        color:#222429;
+    .hover-span {
+        color: #222429;
         transition: .5s;
         display: block;
     }
-    #cart:hover .hover-span{
-        color:#fff;
+
+    #cart:hover .hover-span {
+        color: #fff;
     }
 </style>
 @{
@@ -15,9 +16,7 @@
 }
 @if (Model.Banner != null)
 {
-   
 
-    
     <div class="container-fluid  py-5 px-0" style="margin-bottom: 90px; background-color: @Model.Banner.BgColor">
         <div class="row mx-0 align-items-center">
             <div class="col-lg-6 px-md-5 text-center text-lg-left">
@@ -74,10 +73,10 @@ else
                 foreach (var services in Model.Services)
                 {
                     string[] txtSplit = services.Category.Name.Split(" ");
-                    <div  id="cart" class="col-lg-3 mb-2">
-                        <div class="service-item rounded p-5 mb-4">
+                    <div class="col-lg-3 mb-2">
+                        <div id="cart" class="service-item rounded p-5 mb-4">
                             <i class="fa-solid fa-3x @services.Icon text-primary mb-4"></i>
-                            <h4 class="text-uppercase mb-4"><span class="d-block text-body"> <span class="hover-span" >@txtSplit[0]</span> @txtSplit[1]</span></h4>
+                            <h4 class="text-uppercase mb-4"><span class="d-block text-body"> <span class="hover-span">@txtSplit[0]</span> @txtSplit[1]</span></h4>
                             <p class="m-0">@services.Description</p>
                         </div>
                     </div>
@@ -111,66 +110,27 @@ else
             </div>
         </div>
         <div class="row portfolio-container">
-            <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-                <div class="position-relative rounded overflow-hidden mb-2">
-                    <img class="img-fluid w-100" src="img/portfolio-1.jpg" alt="">
-                    <div class="portfolio-btn d-flex align-items-center justify-content-center">
-                        <a href="img/portfolio-1.jpg" data-lightbox="portfolio">
-                            <i class="fa fa-4x fa-plus text-primary"></i>
-                        </a>
+            @{
+                int num = 0;
+                foreach (var project in Model.Projects)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4 portfolio-item @(num ==1 ? "first" : "second" ) ">
+                        <div class="position-relative rounded overflow-hidden mb-2">
+                            <img class="img-fluid w-100" src="@project.PhotoURL" alt="">
+                            <div class="portfolio-btn d-flex align-items-center justify-content-center">
+                                <a href="@project.PhotoURL" data-lightbox="portfolio">
+                                    <i class="fa fa-4x fa-plus text-primary"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-                <div class="position-relative rounded overflow-hidden mb-2">
-                    <img class="img-fluid w-100" src="img/portfolio-2.jpg" alt="">
-                    <div class="portfolio-btn d-flex align-items-center justify-content-center">
-                        <a href="img/portfolio-2.jpg" data-lightbox="portfolio">
-                            <i class="fa fa-4x fa-plus text-primary"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-                <div class="position-relative rounded overflow-hidden mb-2">
-                    <img class="img-fluid w-100" src="img/portfolio-3.jpg" alt="">
-                    <div class="portfolio-btn d-flex align-items-center justify-content-center">
-                        <a href="img/portfolio-3.jpg" data-lightbox="portfolio">
-                            <i class="fa fa-4x fa-plus text-primary"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-                <div class="position-relative rounded overflow-hidden mb-2">
-                    <img class="img-fluid w-100" src="img/portfolio-4.jpg" alt="">
-                    <div class="portfolio-btn d-flex align-items-center justify-content-center">
-                        <a href="img/portfolio-4.jpg" data-lightbox="portfolio">
-                            <i class="fa fa-4x fa-plus text-primary"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-                <div class="position-relative rounded overflow-hidden mb-2">
-                    <img class="img-fluid w-100" src="img/portfolio-5.jpg" alt="">
-                    <div class="portfolio-btn d-flex align-items-center justify-content-center">
-                        <a href="img/portfolio-3.jpg" data-lightbox="portfolio">
-                            <i class="fa fa-4x fa-plus text-primary"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-                <div class="position-relative rounded overflow-hidden mb-2">
-                    <img class="img-fluid w-100" src="img/portfolio-6.jpg" alt="">
-                    <div class="portfolio-btn d-flex align-items-center justify-content-center">
-                        <a href="img/portfolio-4.jpg" data-lightbox="portfolio">
-                            <i class="fa fa-4x fa-plus text-primary"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    num++;
+                    num--;
+                }
+            }
+
+
+
         </div>
     </div>
 </div>
@@ -180,72 +140,41 @@ else
     <div class="container pt-5 pb-3">
         <h1 class="display-4 text-uppercase text-center mb-5">Competitive Pricing</h1>
         <div class="row">
-            <div class="col-lg-4 mb-2">
-                <div class="bg-light rounded text-center pt-5 mt-lg-5 mb-4">
-                    <h2 class="text-uppercase">Basic</h2>
-                    <h6 class="text-uppercase text-body mb-5">The Best Choice</h6>
-                    <div class="text-center bg-dark rounded-circle p-4 mb-2">
-                        <h1 class="display-4 text-white mb-0">
-                            <small class="align-top"
-                                   style="font-size: 22px; line-height: 45px;">$</small>49<small class="align-bottom" style="font-size: 16px; line-height: 40px;">
-                                /
-                                Mo
-                            </small>
-                        </h1>
+            @{
+                int numbers = 0;
+                foreach (var packet in Model.Packets)
+                {
+
+
+                    <div class="col-lg-4 mb-2">
+                        <div class=" @(numbers % 2 == 0 ? "bg-light  mt-lg-5" : "bg-dark ") rounded text-center pt-5  mb-4">
+                            <h2 class="text-uppercase @(numbers % 2 == 0 ? " " : "text-white")">@packet.PacketCategory.Name</h2>
+                            <h6 class="text-uppercase @(numbers % 2 == 0 ? "text-secondary" : "text-body") mb-5">The Best Choice</h6>
+                            <div class="text-center @(numbers % 2 == 0 ? "bg-dark" : "bg-primary") rounded-circle p-4 mb-2">
+                                <h1 class="display-4 @(numbers % 2 == 0 ? "text-white" : " ") mb-0">
+                                    <small class="align-top"
+                                       style="font-size: 22px; line-height: 45px;">$</small>@packet.Price<small class="align-bottom" style="font-size: 16px; line-height: 40px;">
+                                        /
+                                        Mo
+                                    </small>
+                                </h1>
+                            </div>
+                            <div class="text-center @(numbers % 2 == 0 ? " " : "text-secondary") py-4">
+                                <p>@packet.Language</p>
+                                <p>@packet.Description</p>
+                                <p>@packet.Description_1</p>
+                                <p>@packet.Description_2</p>
+                                <a href="" class="btn @(numbers % 2 == 0 ? "btn-dark" : "btn-primary") text-uppercase py-2 px-4 my-3">Order Now</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-center py-4">
-                        <p>HTML5 & CSS3</p>
-                        <p>Bootstrap v4</p>
-                        <p>Responsive Layout</p>
-                        <p>Compatible With All Browsers</p>
-                        <a href="" class="btn btn-dark text-uppercase py-2 px-4 my-3">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-2">
-                <div class="bg-dark rounded text-center pt-5 mb-4">
-                    <h2 class="text-uppercase text-white">Standard</h2>
-                    <h6 class="text-uppercase text-secondary mb-5">The Best Choice</h6>
-                    <div class="text-center bg-primary rounded-circle p-4 mb-2">
-                        <h1 class="display-4 mb-0">
-                            <small class="align-top"
-                                   style="font-size: 22px; line-height: 45px;">$</small>99<small class="align-bottom" style="font-size: 16px; line-height: 40px;">
-                                /
-                                Mo
-                            </small>
-                        </h1>
-                    </div>
-                    <div class="text-center text-secondary py-4">
-                        <p>HTML5 & CSS3</p>
-                        <p>Bootstrap v4</p>
-                        <p>Responsive Layout</p>
-                        <p>Compatible With All Browsers</p>
-                        <a href="" class="btn btn-primary text-uppercase py-2 px-4 my-3">Order Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-2">
-                <div class="bg-light rounded text-center pt-5 mt-lg-5 mb-4">
-                    <h2 class=" text-uppercase">Extended</h2>
-                    <h6 class="text-uppercase text-body mb-5">The Best Choice</h6>
-                    <div class="text-center bg-dark rounded-circle p-4 mb-2">
-                        <h1 class="display-4 text-white mb-0">
-                            <small class="align-top"
-                                   style="font-size: 22px; line-height: 45px;">$</small>149<small class="align-bottom" style="font-size: 16px; line-height: 40px;">
-                                /
-                                Mo
-                            </small>
-                        </h1>
-                    </div>
-                    <div class="text-center py-4">
-                        <p>HTML5 & CSS3</p>
-                        <p>Bootstrap v4</p>
-                        <p>Responsive Layout</p>
-                        <p>Compatible With All Browsers</p>
-                        <a href="" class="btn btn-dark text-uppercase py-2 px-4 my-3">Order Now</a>
-                    </div>
-                </div>
-            </div>
+                    numbers++;
+
+                }
+
+            }
+
+
         </div>
     </div>
 </div>
@@ -255,70 +184,27 @@ else
     <div class="container py-5">
         <h1 class="display-4 text-uppercase text-center mb-5">Meet Our Team</h1>
         <div class="owl-carousel team-carousel position-relative" style="padding-left: 30px;">
-            <div class="team-item rounded overflow-hidden">
-                <div class="position-relative">
-                    <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
-                    <div class="team-overlay">
-                        <div class="d-flex align-items-center justify-content-start">
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+            @foreach (var team in @Model.Teams)
+            {
+                <div class="team-item rounded overflow-hidden">
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="@team.PhotoURL" alt="">
+                        <div class="team-overlay">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="bg-light text-center p-4">
-                    <h4 class="text-uppercase">John Doe</h4>
-                    <p class="m-0">CEO, Founder</p>
-                </div>
-            </div>
-            <div class="team-item rounded overflow-hidden">
-                <div class="position-relative">
-                    <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
-                    <div class="team-overlay">
-                        <div class="d-flex align-items-center justify-content-start">
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                    <div class="bg-light text-center p-4">
+                        <h4 class="text-uppercase">@team.Name</h4>
+                        <p class="m-0">@team.Roles.RoleName</p>
                     </div>
                 </div>
-                <div class="bg-light text-center p-4">
-                    <h4 class="text-uppercase">Kate Wilson</h4>
-                    <p class="m-0">Designer</p>
-                </div>
-            </div>
-            <div class="team-item rounded overflow-hidden">
-                <div class="position-relative">
-                    <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
-                    <div class="team-overlay">
-                        <div class="d-flex align-items-center justify-content-start">
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-light text-center p-4">
-                    <h4 class="text-uppercase">John Brown</h4>
-                    <p class="m-0">Developer</p>
-                </div>
-            </div>
-            <div class="team-item rounded overflow-hidden">
-                <div class="position-relative">
-                    <img class="img-fluid w-100" src="img/team-4.jpg" alt="">
-                    <div class="team-overlay">
-                        <div class="d-flex align-items-center justify-content-start">
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-lg btn-primary btn-lg-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-light text-center p-4">
-                    <h4 class="text-uppercase">Paul Watson</h4>
-                    <p class="m-0">Marketer</p>
-                </div>
-            </div>
+            }
+
+
         </div>
     </div>
 </div>
@@ -328,30 +214,15 @@ else
     <div class="container py-5">
         <h1 class="display-4 text-uppercase text-center mb-5">Our Client's Say</h1>
         <div class="owl-carousel testimonial-carousel">
-            <div class="testimonial-item position-relative text-center rounded p-4">
-                <img class="img-fluid rounded mx-auto my-4" src="img/testimonial-1.jpg" alt="">
-                <h5 class="text-uppercase">Client Name</h5>
-                <p class="text-uppercase">Profession</p>
-                <p class="text-secondary">Tempor lorem dolor sea et ipsum, lorem justo kasd dolore vero eos. Lorem duo ipsum sea amet et clita dolor</p>
-            </div>
-            <div class="testimonial-item position-relative text-center rounded p-4">
-                <img class="img-fluid rounded mx-auto my-4" src="img/testimonial-2.jpg" alt="">
-                <h5 class="text-uppercase">Client Name</h5>
-                <p class="text-uppercase">Profession</p>
-                <p class="text-secondary">Tempor lorem dolor sea et ipsum, lorem justo kasd dolore vero eos. Lorem duo ipsum sea amet et clita dolor</p>
-            </div>
-            <div class="testimonial-item position-relative text-center rounded p-4">
-                <img class="img-fluid rounded mx-auto my-4" src="img/testimonial-3.jpg" alt="">
-                <h5 class="text-uppercase">Client Name</h5>
-                <p class="text-uppercase">Profession</p>
-                <p class="text-secondary">Tempor lorem dolor sea et ipsum, lorem justo kasd dolore vero eos. Lorem duo ipsum sea amet et clita dolor</p>
-            </div>
-            <div class="testimonial-item position-relative text-center rounded p-4">
-                <img class="img-fluid rounded mx-auto my-4" src="img/testimonial-4.jpg" alt="">
-                <h5 class="text-uppercase">Client Name</h5>
-                <p class="text-uppercase">Profession</p>
-                <p class="text-secondary">Tempor lorem dolor sea et ipsum, lorem justo kasd dolore vero eos. Lorem duo ipsum sea amet et clita dolor</p>
-            </div>
+            @foreach (var client in Model.Clients)
+            {
+                <div class="testimonial-item position-relative text-center rounded p-4">
+                    <img class="img-fluid rounded mx-auto my-4" src="@client.PhotoURL" alt="">
+                    <h5 class="text-uppercase">@client.Name</h5>
+                    <p class="text-uppercase">@client.Profession</p>
+                    <p class="text-secondary">@client.Description</p>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -362,7 +233,7 @@ else
         <div class="col-12 px-0" style="height: 500px;">
             <div class="position-relative h-100">
                 <iframe class="position-relative w-100 h-100"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+                        src="@Model.Location.LocationLink"
                         frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
                         tabindex="0"></iframe>
             </div>
@@ -372,31 +243,31 @@ else
         <div class="col-lg-6 col-md-8 col-sm-10 px-0">
             <div class="contact-form bg-white rounded p-5">
                 <div id="success"></div>
-                <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                <form id="contactForm" method="post" novalidate="novalidate">
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="control-group">
-                                <input type="text" class="form-control bg-light border-0 p-4" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                                <input type="text" class="form-control bg-light border-0 p-4" name = "Name" id="Name" placeholder="Your Name"  />
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="control-group">
-                                <input type="email" class="form-control bg-light border-0 p-4" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                                <input type="email" class="form-control bg-light border-0 p-4" name="Email" id="Email" placeholder="Your Email"   />
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                     </div>
                     <div class="control-group">
-                        <input type="text" class="form-control bg-light border-0 p-4" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                        <input type="text" class="form-control bg-light border-0 p-4" id="subject" placeholder="Subject" name="Subject"   />
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="control-group">
-                        <textarea class="form-control bg-light border-0 py-3 px-4" rows="5" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                        <textarea class="form-control bg-light border-0 py-3 px-4" rows="5" id="message" name="Message" placeholder="Message"  ></textarea>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-primary text-uppercase py-3 px-5" type="submit" id="sendMessageButton">Send Message</button>
+                        <button class="btn btn-primary text-uppercase py-3 px-5" type="submit" id="submitButton">Send Message</button>
                     </div>
                 </form>
             </div>
@@ -405,3 +276,33 @@ else
 </div>
 <!-- Contact End -->
 
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+        let button  = document.getElementById("submitButton")
+        console.log(button)
+        button.onclick = (e) =>{
+            e.preventDefault()
+
+            var FormData = $("#contactForm").serialize();
+
+            console.table(FormData)
+            $.ajax({
+                type: "POST",
+                url: "/Home/Contact",
+                data: FormData,
+                success: function(){
+                    Swal.fire(
+                    'Good job!',
+                    'You clicked the button!',
+                    'success'
+                    )
+                }
+            })
+        }
+</script>

@@ -18,7 +18,7 @@
     }
 </style>
 
-@if (ViewBag.CategoryCount <=5)
+@if (Model.Count() <=5)
 {
     <div class="margin">
         <a style="width:100px;" href="/dashboard/category/create" class="btn btn-success btn-icon-split">

@@ -20,5 +20,12 @@ namespace DataAccess.Concrete.EntityFramework
             return _context.Projects.Include(x =>x.Category).ToList();
 
         }
+
+        public Projects GetProjectsByCategory(int id)
+        {
+            using var _context = new AppDbContext();
+            var project = _context.Projects.Include(x =>x.Category).FirstOrDefault(x => x.Id == id);
+            return project;
+        }
     }
 }

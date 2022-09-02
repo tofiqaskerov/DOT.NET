@@ -1,0 +1,19 @@
+﻿@model PacketCategory
+<style>
+    input {
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="card shadow my-5">
+    <div class="card-body">
+        <form class="form-group" method="post">
+            <input class="form-control" type="text" value = "@Model.Name" name="Name" placeholder="Category Name" />
+            <br />
+            <input type="submit" value="Create" class="btn btn-outline-success" />
+            <div>
+                <a class="btn btn-success" href="/dashboard/packetcategory">Return Index</a>
+            </div>
+        </form>
+    </div>
+</div>

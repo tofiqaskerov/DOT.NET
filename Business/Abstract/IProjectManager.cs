@@ -10,5 +10,10 @@ namespace Business.Abstract
     public interface IProjectManager
     {
         List<Projects> GetAllProjects();
+        void Add(Projects project);
+        Projects Get(int id);
+        Projects GetProjectsByCategory(int id);
+        void Update(Projects project);  
+        void Remove(Projects project);
     }
 }

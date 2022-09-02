@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,6 @@ namespace DOT.NET.Areas.Dashboard.Controllers
         public IActionResult Index()
         {
             var projects = _projectManager.GetAllProjects();
-          
             return View(projects);
         }
 
@@ -30,54 +30,74 @@ namespace DOT.NET.Areas.Dashboard.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Category = _categoryManager.GetAll();
-            return View();
+            var categories = _categoryManager.GetAll();
+            return View(categories);
         }
         
         [HttpPost]
-        public IActionResult Create(IFormCollection collection)
+        public IActionResult Create(Projects project, IFormFile NewPhoto )
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            
+                var fileExtation = Path.GetExtension(NewPhoto.FileName);
 
+                string myPhoto = Guid.NewGuid().ToString() + Path.GetExtension(NewPhoto.FileName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Img", myPhoto);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    NewPhoto.CopyTo(stream);
+                }
+                project.PhotoURL = "Img/" + myPhoto;
+                _projectManager.Add(project);
+                return RedirectToAction("Index");
+            
+           
+        }
+        [HttpGet]
         public IActionResult Edit(int id)
         {
-            return View();
+            var project = _projectManager.GetProjectsByCategory(id);
+            if(project == null)return NotFound();
+            ViewData["Category"] = _categoryManager.GetAll();
+            return View(project);
         }
 
         [HttpPost]
-
-        public IActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(Projects project, IFormFile NewPhoto, string? oldPhoto)
         {
-            try
+
+            if (NewPhoto != null)
             {
-                return RedirectToAction(nameof(Index));
+                var fileExtation = Path.GetExtension(NewPhoto.FileName);
+
+                string myPhoto = Guid.NewGuid().ToString() + Path.GetExtension(NewPhoto.FileName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/admin/Img", myPhoto);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    NewPhoto.CopyTo(stream);
+                };
+                project.PhotoURL = "admin/Img/" + myPhoto;
             }
-            catch
-            {
-                return View();
-            }
+            else project.PhotoURL = oldPhoto;
+
+            _projectManager.Update(project);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            return View();
+            var project = _projectManager.Get(id);
+            if(project == null) return NotFound();
+
+            return RedirectToAction("Index");
         }
 
 
         [HttpPost]
-
-        public IActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(Projects project)
         {
             try
             {
+                _projectManager.Remove(project);
                 return RedirectToAction(nameof(Index));
             }
             catch

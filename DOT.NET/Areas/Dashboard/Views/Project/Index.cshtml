@@ -14,12 +14,11 @@
 </style>
 
 
-@if (Model == null)
-{
+
     <div class="container">
         <a class="btn btn-success mt-5 mb-4 " style=" width: 10%;" href="/dashboard/project/create">Create</a>
     </div>
-}
+
 
 @if (Model != null)
 {
@@ -43,7 +42,7 @@
                                 <td>
                                     @project.Id
                                 </td>
-                                <td>@project.Category</td>
+                                <td>@project.Category.Name</td>
                                 <td>
                                     <div>
                                         <img src="~/@project.PhotoURL" width="200" height="150" />

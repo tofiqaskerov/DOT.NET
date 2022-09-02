@@ -1,0 +1,117 @@
+﻿@model IEnumerable<PacketCategory>
+<style>
+    a {
+        margin-bottom: 10px;
+    }
+
+    td {
+        transition: .3s ease;
+    }
+
+        td:hover {
+            color: red;
+        }
+
+    .icon {
+        color: #FFAA17;
+    }
+</style>
+
+
+
+
+<div class="container">   
+      <a class="btn btn-success mt-2 mb-3 " style=" width: 15%;" href="/dashboard/packetcategory/create">Create Packet Category</a>   
+      <a class="btn btn-success mt-2 mb-3 " style=" width: 15%;" href="/dashboard/packet">Return Packets</a>   
+
+</div>
+
+
+
+
+
+@if (Model != null)
+{
+    <div class="content">
+        <div class="container">
+            <div class="table-responsive">
+
+                <table class="table table-striped custom-table">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Id</th>
+                            <th scope="col">Category Name</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var packetCategory in Model)
+                        {
+                            <tr scope="row" class="font-weight-bold">
+                                <td>@packetCategory.Id</td>
+                                <td>@packetCategory.Name</td>
+                                <td>
+                                    <a style="color:#fff;" class="btn btn-warning" href="/dashboard/packetcategory/edit/@packetCategory.Id">Edit</a>
+                                    <a packetCategory-value="@packetCategory.Id" style="color:#fff;" class=" btnSave btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="alert text-center alert-info">Bazada melumat yoxdur</div>
+    </div>
+}
+
+
+@section Scripts {
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(".btnSave").click(function(e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let packetCategoryId = e.currentTarget.attributes[0].value
+                $.ajax({
+                    method: "POST",
+                    url: "packetcategory/delete/",
+                    data: {
+                        id: packetCategoryId
+                    }
+                })
+                Swal.fire({
+                    title: 'Deleted',
+                    text: "Category is delete!",
+                    icon: 'success',
+
+                }).then((result) => {
+                    window.location = "packetcategory"
+                })
+
+            }
+        })
+    })
+</script>
+}
+
+
+

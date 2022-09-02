@@ -16,8 +16,7 @@ namespace DOT.NET.Areas.Dashboard.Controllers
 
         public IActionResult Index()
         {
-            var categoryCount = _categoryManager.GetAll().Count();
-            ViewBag.CategoryCount = categoryCount;
+
             var category = _categoryManager.GetAll(); 
             return View(category);
         }
