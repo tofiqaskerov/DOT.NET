@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ldlRoHdZ8dnqwx8n8fkl3pef9osSWoK700MeeZ+T1uU=",
+  "Hash": "m/Wh8IyKK2FAY1m3ZgCQO4FrHIkQIu51O2Q+AMB8JGU=",
   "Source": "DOT.NET",
   "BasePath": "_content/DOT.NET",
   "Mode": "Default",
@@ -8617,6 +8617,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\e68e225c-29f0-4058-a46b-bdfd70ed757c.png"
+    },
+    {
+      "Identity": "E:\\Compar.Academy\\csharp\\Web\\DOT.NET\\DOT.NET\\wwwroot\\img\\f56027a9-6826-49a7-8cd5-1be843056f75.jpg",
+      "SourceId": "DOT.NET",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Compar.Academy\\csharp\\Web\\DOT.NET\\DOT.NET\\wwwroot\\",
+      "BasePath": "_content/DOT.NET",
+      "RelativePath": "img/f56027a9-6826-49a7-8cd5-1be843056f75.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\f56027a9-6826-49a7-8cd5-1be843056f75.jpg"
     },
     {
       "Identity": "E:\\Compar.Academy\\csharp\\Web\\DOT.NET\\DOT.NET\\wwwroot\\img\\header.png",

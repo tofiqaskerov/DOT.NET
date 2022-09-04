@@ -1,0 +1,111 @@
+﻿@model Location
+
+@{
+    ViewData["Title"] = "Contact Page";
+}
+
+<!-- Page Header Start -->
+<div class="page-header container-fluid bg-primary d-flex flex-column align-items-center justify-content-center">
+    <h1 class="display-3 text-uppercase mb-3">Contact</h1>
+    <div class="d-inline-flex text-white">
+        <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
+        <h6 class="m-0 px-3">/</h6>
+        <h6 class="text-uppercase m-0">Contact</h6>
+    </div>
+</div>
+<!-- Page Header Start -->
+<!-- Contact Start -->
+@if (Model != null)
+{
+    <div class="container-fluid py-5 px-0">
+        <div class="row mt-5 mx-0">
+            <div class="col-12 px-0" style="height: 500px;">
+                <div class="position-relative h-100">
+                    <iframe class="position-relative w-100 h-100"
+                        src="@Model.LocationLink"
+                        frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                        tabindex="0"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center" style="margin-top: -200px;">
+            <div class="col-lg-6 col-md-8 col-sm-10 px-0">
+                <div class="contact-form bg-white rounded p-5">
+                    <div id="success"></div>
+                    <form id="contactForm" method="post" novalidate="novalidate">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <input type="text" class="form-control bg-light border-0 p-4" name="Name" id="Name" placeholder="Your Name" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="control-group">
+                                    <input type="email" class="form-control bg-light border-0 p-4" name="Email" id="Email" placeholder="Your Email" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control bg-light border-0 p-4" id="subject" placeholder="Subject" name="Subject" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control bg-light border-0 py-3 px-4" rows="5" id="message" name="Message" placeholder="Message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary text-uppercase py-3 px-5" type="submit" id="submitButton">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="alert alert-danger font-monospace text-center">Bazada melumat yoxdur</h3>
+    </div>
+}
+<!-- Contact End -->
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-up"></i></a>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    let button  = document.getElementById("submitButton")
+    console.log(button)
+    button.onclick = (e) =>{
+        e.preventDefault()
+
+        var FormData = $("#contactForm").serialize();
+
+        console.table(FormData)
+        $.ajax({
+            type: "POST",
+            url: "/Home/Contact",
+            data: FormData,
+            success: function(){
+                Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+                )
+            }
+        })
+    }
+</script>
+
