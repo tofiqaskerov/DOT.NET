@@ -1,0 +1,90 @@
+﻿@model Connection
+
+<style>
+    #icons {
+        color: #000;
+    }
+
+    .myIcon {
+        font-size: 40px;
+        margin-right: 40px;
+        margin-top: 10px;
+    }
+
+    .myIcon {
+        font-size: 40px;
+        margin-right: 40px;
+        margin-top: 10px;
+    }
+
+    .bg-color {
+        color: #FFAA17;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit" method="post" class="mt-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label">Title</label>
+                    <input asp-for="Title" class="form-control" name="Title" value="@Model.Title" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">Description</label>
+                    <input asp-for="Description" class="form-control" name="Description" value="@Model.Description" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Icon" class="form-control" type="hidden" name="Icon" id="IcoInput" value="@Model.Icon" />
+                    <div id="icons" class="mt-4">
+                        <i iconName=" fa-location-dot" class="myIcon @( Model.Icon == "fa-location-dot" ? "bg-color" : "") fa-solid fa-location-dot"></i>
+                        <i iconName=" fa-envelope-open" class="myIcon @( Model.Icon == "fa-envelope-open" ? "bg-color" : "") fa-solid fa-envelope-open"></i>
+                        <i iconName=" fa-phone-flip" class="myIcon @( Model.Icon == "fa-phone-flip" ? "bg-color" : "") fa-solid fa-phone-flip"></i>
+                        <i iconName=" fa-envelope-open-text" class="myIcon @( Model.Icon == "fa-envelope-open-text" ? "bg-color" : "") fa-solid fa-envelope-open-text"></i>
+                        <i iconName=" fa-pen-to-square" class="myIcon @( Model.Icon == "fa-pen-to-square" ? "bg-color" : "") fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <span asp-validation-for="Icon" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a class="btn btn-success" href="/dashboard/connection">Return Index</a>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+<script>
+    var icons = document.getElementById("icons")
+     var myIcon = document.querySelectorAll(".myIcon")
+     for(let i=0; i<myIcon.length; i++){
+          myIcon[i].onclick = (e)=>{
+                for(let j =0; j<myIcon.length; j++ ){
+                    myIcon[j].style.color = '#000'
+                }
+                myIcon[i].style.color = '#FFAA17';
+
+          }
+     }
+
+     let myInput = document.getElementById("IcoInput")
+     $(document).on('click', '.myIcon', function (e) {
+         myInput.value = e.currentTarget.attributes.iconName.value
+
+         //this.style.color = "red"
+         //e.style.color = "red"
+         console.log(e.target)
+     });
+</script>

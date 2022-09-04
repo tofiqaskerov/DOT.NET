@@ -1,0 +1,79 @@
+﻿
+<style>
+    input {
+        margin-bottom: 10px;
+    }
+
+    #icons {
+        color: #000;
+    }
+
+    .myIcon {
+        font-size: 40px;
+        margin-right: 40px;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="card shadow my-5">
+    <div class="card-body">
+        <form class="form-group" id="contactForm" method="post">
+            <div class="row">
+                <div class="col-lg-12 my-2">
+                    <input class="form-control" placeholder="Title" type="text" name="Title" />
+                </div>
+                <div class="col-lg-12 my-2">
+                    <input class="form-control" placeholder="Description" type="text" name="Description" />
+                </div>
+
+                <div class="input-group my-2">
+                    <input name="Icon" id="IcoInput" class="form-control" type="hidden" placeholder="Icon" />
+                </div>
+                <div class="col-lg-12 mb-2" style="margin-top:-20px;">
+                    <div id="icons">
+                        <i iconName=" fa-location-dot" class="myIcon fa-solid fa-location-dot"></i>
+                        <i iconName=" fa-envelope-open" class="myIcon fa-solid fa-envelope-open"></i>
+                        <i iconName=" fa-phone-flip" class="myIcon fa-solid fa-phone-flip"></i>
+                        <i iconName=" fa-envelope-open-text" class="myIcon fa-solid fa-envelope-open-text"></i>
+                        <i iconName=" fa-pen-to-square" class="myIcon fa-solid fa-pen-to-square"></i>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <input id="submitButton" type="submit" value="Create" class="btn btn-outline-success mt4" />
+        </form>
+    </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script>
+    var icons = document.getElementById("icons")
+     var myIcon = document.querySelectorAll(".myIcon")
+     for(let i=0; i<myIcon.length; i++){
+          myIcon[i].onclick = (e)=>{
+                for(let j =0; j<myIcon.length; j++ ){
+                    myIcon[j].style.color = '#000'
+                }
+                myIcon[i].style.color = '#FFAA17';
+          }
+     }
+
+     let myInput = document.getElementById("IcoInput")
+     $(document).on('click', '.myIcon', function (e) {
+         myInput.value = e.currentTarget.attributes.iconName.value
+
+         //this.style.color = "red"
+         //e.style.color = "red"
+         console.log(e.target)
+     });
+</script>
+
+

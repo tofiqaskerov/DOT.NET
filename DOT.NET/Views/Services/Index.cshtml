@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Services>
+
+@{
+    ViewData["Title"] = "Services Page";
+}
+<style>
+    .hover-span {
+        color: #222429;
+        transition: .5s;
+        display: block;
+    }
+
+    #cart:hover .hover-span {
+        color: #fff;
+    }
+</style>
+
+
+<!-- Page Header Start -->
+<div class="page-header container-fluid bg-primary d-flex flex-column align-items-center justify-content-center">
+    <h1 class="display-3 text-uppercase mb-3">Services</h1>
+    <div class="d-inline-flex text-white">
+        <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
+        <h6 class="m-0 px-3">/</h6>
+        <h6 class="text-uppercase m-0">Services</h6>
+    </div>
+</div>
+<!-- Page Header Start -->
+<!-- Services Start -->
+@if (Model != null)
+{
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Our Creative Services</h1>
+            <div class="row">
+
+                @{
+
+                    foreach (var services in Model)
+                    {
+                        string[] txtSplit = services.Category.Name.Split(" ");
+                        <div class="col-lg-3 mb-2">
+                            <div id="cart" class="service-item rounded p-5 mb-4">
+                                <i class="fa-solid fa-3x @services.Icon text-primary mb-4"></i>
+                                <h4 class="text-uppercase mb-4"><span class="d-block text-body"> <span class="hover-span">@txtSplit[0]</span> @txtSplit[1]</span></h4>
+                                <p class="m-0">@services.Description</p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="alert alert-danger font-monospace text-center">Bazada melumat yoxdur</h3>
+    </div>
+}
+<!-- Services End -->

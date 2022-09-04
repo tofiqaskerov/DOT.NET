@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DOT.NET.Areas.Dashboard.Controllers
-{
+{   
     [Area("dashboard")]
     public class ContactController : Controller
     {
@@ -25,7 +25,6 @@ namespace DOT.NET.Areas.Dashboard.Controllers
         [HttpGet]
         public IActionResult Edit()
         {
-            
             return View();   
         }
         [HttpPost]
@@ -37,6 +36,12 @@ namespace DOT.NET.Areas.Dashboard.Controllers
             return RedirectToAction("Index");   
         }
 
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            var contact = _contactManager.Get(id);
+            return View(contact);
+        }
       
         [HttpGet]
         public IActionResult Delete(int id)

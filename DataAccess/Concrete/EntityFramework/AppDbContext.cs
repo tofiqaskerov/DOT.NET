@@ -26,5 +26,6 @@ namespace DataAccess.Concret.EntityFramework
         public DbSet<Client> Clients { get; set; }  
         public DbSet<Location> Location { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Connection> Connections { get; set; }  
     }
 }

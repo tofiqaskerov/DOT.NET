@@ -1,12 +1,24 @@
 ﻿@model List<Contact>
 <style>
-    .minus  {
+    .minus {
         color: red;
         font-size: 40px;
     }
-    .checked{
+
+    .checked {
         color: green;
-        font-size:40px;
+        font-size: 40px;
+    }
+
+    td {
+        transition: .3s ease;
+    }
+
+        td:hover {
+            color: red;
+        }
+    a{
+        cursor:pointer;
     }
 </style>
 @if (Model != null)
@@ -23,7 +35,6 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Subject</th>
-                            <th scope="col">Message</th>
                             <th scope="col">Is Read</th>
                             <th scope="col">Action</th>
 
@@ -37,7 +48,6 @@
                                 <td>@contact.Name</td>
                                 <td>@contact.Email</td>
                                 <td>@contact.Subject</td>
-                                <td>@contact.Message</td>
                                 <td>
                                     @{
                                         if (contact.IsRead == false)
@@ -46,13 +56,14 @@
                                         }
                                         else
                                         {
-                                            <a ><i class="checked fa-solid fa-check"></i></a>   
+                                            <a><i class="checked fa-solid fa-check"></i></a>
                                         }
                                     }
 
                                 </td>
                                 <td>
                                     <a contact-value="@contact.Id" style="color:#fff;" class=" btnSave btn btn-danger">Delete</a>
+                                    <a href="/dashboard/contact/detail/@contact.Id" style="color:#fff;" class="  btn btn-warning">Detail</a>
                                 </td>
                             </tr>
                         }
@@ -109,13 +120,13 @@ else
         })
     })
 
-    //var isRead = document.getElementById("isRead");
-    //isRead.addEventListener("click", function(e){
-    //   var read =  e.currentTarget.firstChild;
-    //   read.removeAttribute("class");
-    //   read.setAttribute("class", "fa-solid check fa-check")
+    var isRead = document.getElementById("isRead");
+    isRead.addEventListener("click", function(e){
+       var read =  e.currentTarget.firstChild;
+       read.removeAttribute("class");
+       read.setAttribute("class", "fa-solid checked fa-check")
 
-    //})
+    })
 </script>
 <script>
     $("#isRead").click(function(e){

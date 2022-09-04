@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Connection>
+<style>
+    a {
+        margin-bottom: 10px;
+    }
+
+    td {
+        transition: .3s ease;
+    }
+
+    td:hover {
+        color: red;
+    }
+    .icon{
+        color:#FFAA17;
+    }
+</style>
+
+
+@if (ViewBag.ConnectionLimit <= 2)
+{
+    <div class="container">
+        <a class="btn btn-success mt-5 mb-4 " style=" width: 10%;" href="/dashboard/connection/create">Create</a>
+    </div>
+}
+
+@if (Model.FirstOrDefault() != null)
+{
+    <div class="content">
+        <div class="container">
+            <div class="table-responsive">
+
+                <table class="table table-striped custom-table">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Icon</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var connection in Model)
+                        {
+                            <tr scope="row" class="font-weight-bold">
+                                <td>
+                                    @connection.Id
+                                </td>
+                                <td>@connection.Title</td>
+                                <td>
+                                    @connection.Description
+                                </td>
+                                <td><i class="fa-solid icon fa-3x @connection.Icon"></i></td>
+                                <td>
+                                    <a style="color:#fff;" class="btn btn-warning" href="/dashboard/connection/edit/@connection.Id">Edit</a>
+                                    <a connection-value="@connection.Id" style="color:#fff;" class=" btnSave btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="alert text-center alert-info">Bazada melumat yoxdur</div>
+    </div>
+}
+
+
+@section Scripts {
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    $(".btnSave").click(function(e) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let connectionId = e.currentTarget.attributes[0].value
+                $.ajax({
+                    method: "POST",
+                    url: "connection/delete/",
+                    data: {
+                        id: connectionId
+                    }
+                })
+                Swal.fire({
+                    title: 'Deleted',
+                    text: "connection is delete!",
+                    icon: 'success',
+
+                }).then((result) => {
+                    window.location = "connection"
+                })
+
+            }
+        })
+    })
+</script>
+}
+
+
+

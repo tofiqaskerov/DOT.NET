@@ -32,6 +32,8 @@ builder.Services.AddScoped<ILocationManager, LocationManager>();
 builder.Services.AddScoped<ILocationDal, LocationDal>();
 builder.Services.AddScoped<IContactManager, ContactManager>();
 builder.Services.AddScoped<IContactDal, ContactDal>();
+builder.Services.AddScoped<IConnectionManager, ConnectionManager>();
+builder.Services.AddScoped<IConnectionDal, ConnectionDal>();
 
 var app = builder.Build();
 

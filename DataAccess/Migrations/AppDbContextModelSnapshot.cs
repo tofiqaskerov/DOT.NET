@@ -125,6 +125,31 @@ namespace DataAccess.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.Connection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Connections");
+                });
+
             modelBuilder.Entity("Entities.Concrete.Contact", b =>
                 {
                     b.Property<int>("Id")
