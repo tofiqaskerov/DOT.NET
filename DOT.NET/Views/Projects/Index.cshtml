@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Projects>
+
+@{
+    ViewData["Title"] = "Projects Page";
+}
+
+
+<div class="page-header container-fluid bg-primary d-flex flex-column align-items-center justify-content-center">
+    <h1 class="display-3 text-uppercase mb-3">Projects</h1>
+    <div class="d-inline-flex text-white">
+        <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
+        <h6 class="m-0 px-3">/</h6>
+        <h6 class="text-uppercase m-0">Projects</h6>
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Visit Our Projects</h1>
+            <div class="row">
+                <div class="col-12 text-center mb-2">
+                    <ul class="list-inline mb-4" id="portfolio-flters">
+                        <li class="btn btn-outline-dark text-uppercase py-2 px-4 active" data-filter="*">
+                            <i class="fa fa-star text-primary mr-2"></i>All
+                        </li>
+                        @{
+                            var number = 0;
+                            @foreach (var category in ViewData["Category"] as List<Category>)
+                            {
+                                <li class="btn btn-outline-dark text-uppercase py-2 px-4 active" data-filter="@(number%2==0 ? ".first" : ".second")">
+                                    <i class="fa fa-star text-primary mr-2"></i>@category.Name
+                                </li>
+                                number++;
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="row portfolio-container">
+                @{
+                    int num = 0;
+                    foreach (var project in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 mb-4 portfolio-item @(num ==1 ? "first" : "second" ) ">
+                            <div class="position-relative rounded overflow-hidden mb-2">
+                                <img class="img-fluid w-100" src="@project.PhotoURL" alt="">
+                                <div class="portfolio-btn d-flex align-items-center justify-content-center">
+                                    <a href="@project.PhotoURL" data-lightbox="portfolio">
+                                        <i class="fa fa-4x fa-plus text-primary"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        num++;
+                        num--;
+                    }
+                }
+
+
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="alert alert-danger font-monospace text-center">Bazada melumat yoxdur</h3>
+    </div>
+}
